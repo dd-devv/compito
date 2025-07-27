@@ -8,7 +8,7 @@ import { TimeAgoPipe } from '../../../pipes/timeAgo.pipe';
 import { Skeleton } from 'primeng/skeleton';
 import { ExtractDomainPipe } from '../../../pipes/extract-domain.pipe';
 import { RouterLink } from '@angular/router';
-import { DropdownModule } from 'primeng/dropdown';
+import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { Tooltip } from 'primeng/tooltip';
 import AuthService from '../../auth/services/auth.service';
@@ -36,7 +36,7 @@ import { firstValueFrom } from 'rxjs';
     BadgeModule,
     ExtractDomainPipe,
     RouterLink,
-    DropdownModule,
+    Select,
     FormsModule,
     Tooltip,
     Toast,

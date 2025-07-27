@@ -6,7 +6,6 @@ import { TimeAgoPipe } from '../../../pipes/timeAgo.pipe';
 import { BadgeModule } from 'primeng/badge';
 import { ExtractDomainPipe } from '../../../pipes/extract-domain.pipe';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
-import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { Tooltip } from 'primeng/tooltip';
 import { Toast } from 'primeng/toast';
@@ -22,6 +21,7 @@ import { ProductPublic } from '../interfaces';
 import { SkeletonProdComponent } from '../../../ui/skeleton-prod/skeleton-prod.component';
 import { CategoryService } from '../services/category.service';
 import { firstValueFrom } from 'rxjs';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-products-all',
@@ -35,7 +35,7 @@ import { firstValueFrom } from 'rxjs';
     BadgeModule,
     ExtractDomainPipe,
     RouterLink,
-    DropdownModule,
+    Select,
     FormsModule,
     Tooltip,
     Toast,

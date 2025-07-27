@@ -136,7 +136,7 @@
 
     <!-- Filtro por tienda -->
     <div class="w-full md:w-64">
-      <p-dropdown [options]="availableStores" [(ngModel)]="selectedStore" (onChange)="applyFilter()" [showClear]="true"
+      <p-select [options]="availableStores" [(ngModel)]="selectedStore" (onChange)="applyFilter()" [showClear]="true"
         placeholder="Filtrar por tienda" appendTo="body" styleClass="w-full">
         <ng-template pTemplate="item" let-store>
           <div class="flex items-center gap-2">
@@ -144,7 +144,7 @@
             <span>{{ store | titlecase }}</span>
           </div>
         </ng-template>
-      </p-dropdown>
+      </p-select>
     </div>
   </div>
   <!-- Modal de suscripción -->

@@ -18,13 +18,13 @@ import { TimeAgoPipe } from '../../../pipes/timeAgo.pipe';
 import AuthService from '../../auth/services/auth.service';
 import { SubscriptionService } from '../services/subscription.service';
 import { ExtractDomainPipe } from '../../../pipes/extract-domain.pipe';
-import { DropdownModule } from 'primeng/dropdown';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { PaginatePipe } from '../../../pipes/paginate.pipe';
 import { Product } from '../interfaces';
 import { CarouselModule } from 'primeng/carousel'; // Agrega esto
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { SkeletonProdComponent } from "../../../ui/skeleton-prod/skeleton-prod.component";
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-products',
@@ -47,7 +47,7 @@ import { SkeletonProdComponent } from "../../../ui/skeleton-prod/skeleton-prod.c
     ConfirmDialog,
     TimeAgoPipe,
     ExtractDomainPipe,
-    DropdownModule,
+    Select,
     PaginationComponent,
     PaginatePipe,
     CarouselModule,
@@ -403,7 +403,7 @@ export default class ProductsComponent implements OnInit {
       'hushpuppies',
       'miniso',
       'tiendamia',
-      'estilos' 
+      'estilos'
     ];
 
     const urlTrimmed = this.url.trim();
