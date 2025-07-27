@@ -1,8 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import { ApplicationConfig, isDevMode, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import Aura from '@primeuix/themes/aura';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -13,16 +13,17 @@ import {
   provideTanStackQuery,
   QueryClient,
   withDevtools
-} from '@tanstack/angular-query-experimental'
+} from '@tanstack/angular-query-experimental';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
+    provideHttpClient(withFetch()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideTanStackQuery(new QueryClient(), withDevtools()),
-    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
-    provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
     providePrimeNG({
+      ripple: true,
       theme: {
         preset: Aura,
         options: {
@@ -32,10 +33,10 @@ export const appConfig: ApplicationConfig = {
             order: 'tailwind-base, primeng, tailwind-utilities'
           }
         }
-      },
-      ripple: true
+      }
     }),
-    provideClientHydration(withEventReplay(), withNoHttpTransferCache()), provideServiceWorker('ngsw-worker.js', {
+    provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
+    provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     })

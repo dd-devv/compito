@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Variables configurables
-const apiUrl = 'https://api2.acllabay.com/api/';
+const apiUrl = 'https://api.compito.pe/api/';
 const domain = 'https://compito.pe';
 const currentDate = new Date().toISOString().split('T')[0];
 const publicDir = path.join(__dirname, '..', 'public');
