@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
         options: {
           prefix: 'p',
           darkModeSelector: '.my-app-dark',
-          cssLayer: cssLayerConfig
+          cssLayer: true
         }
       }
     }),
