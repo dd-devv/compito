@@ -1,7 +1,7 @@
 import { TimeAgoPipe } from './../../../pipes/timeAgo.pipe';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID, signal, DOCUMENT } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
+import { CommonModule, CurrencyPipe, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { switchMap, tap } from 'rxjs/operators';
 import ProductService from '../services/product.service';
 import { Button } from 'primeng/button';

@@ -1,5 +1,5 @@
-import { CommonModule, CurrencyPipe, isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID, signal, DOCUMENT } from '@angular/core';
+import { CommonModule, CurrencyPipe, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { Skeleton } from 'primeng/skeleton';
 import { ExtractDomainPipe } from '../../../pipes/extract-domain.pipe';
