@@ -15,6 +15,8 @@ import {
   withDevtools
 } from '@tanstack/angular-query-experimental';
 
+const isBrowser = typeof window !== 'undefined';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
@@ -22,23 +24,26 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideTanStackQuery(new QueryClient(), withDevtools()),
-    providePrimeNG({
-      ripple: true,
-      theme: {
-        preset: Aura,
-        options: {
-          prefix: 'p',
-          darkModeSelector: '.my-app-dark',
-          cssLayer: {
-            name: 'primeng',
-            order: 'theme, base, primeng'
+    ...(isBrowser
+      ? [
+        providePrimeNG({
+          ripple: true,
+          theme: {
+            preset: Aura,
+            options: {
+              prefix: 'p',
+              darkModeSelector: '.my-app-dark',
+              cssLayer: {
+                name: 'primeng',
+                order: 'theme, base, primeng'
+              }
+            }
           }
-        }
-      }
-    }),
+        })
+      ]
+      : []),
     provideClientHydration(withEventReplay(), withNoHttpTransferCache()),
     provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
       registrationStrategy: 'registerImmediately'
     })
   ]
