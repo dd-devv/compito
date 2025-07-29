@@ -1,10 +1,10 @@
 {
   "name": "scrap-front-prime",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run prerender:routes && ng build",
+    "build": "npm run prerender:routes && ng build --configuration production",
     "build1": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
