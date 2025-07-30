@@ -86,7 +86,7 @@
           <div class="mt-5 flex justify-center">
             <!-- <p-button severity="contrast" label="Comprar en tienda" icon="pi pi-cart-plus" class="w-full"
             styleClass="w-full" /> -->
-            @if (estadoDelPrecio === 'verde') {
+            @if (estadoDelPrecio === 'verde' && productService.priceHistory().priceHistory.prices.length > 2) {
             <!-- Botón animado para precio mínimo -->
             <p-button severity="success" label="¡COMPRAR AHORA! - PRECIO MÍNIMO" icon="pi pi-bolt"
               class="w-full animate-pulse hover:animate-none"
