@@ -137,6 +137,10 @@ export const routes: Routes = [
         path: 'views',
         loadComponent: () => import('./modules/admin/pages/views/views.component'),
       },
+      {
+        path: 'buys',
+        loadComponent: () => import('./modules/admin/pages/buys/buys.component'),
+      },
     ]
   },
   {
