@@ -137,16 +137,16 @@ export default class HomeComponent implements OnInit {
 
   private setMetaTags(): void {
     // Establecer título de la página
-    this.title.setTitle('Compito - Compra inteligente y ahorra tiempo');
+    this.title.setTitle('Compito.pe | Monitorea productos | Compara precios | Encuentra las mejores ofertas');
 
     // Meta tags para SEO básicos
     this.meta.addTags([
-      { name: 'description', content: 'Compito - Monitorea tus productos favoritos online y recibe alertas de WhatsApp cuando los precios bajen. Ahorra tiempo y dinero en tus compras online.' },
-      { name: 'keywords', content: 'monitoreo de precios, alertas de precios, ahorro en compras, seguimiento de productos, WhatsApp alertas, compras inteligentes, comparador de precios' },
+      { name: 'description', content: 'Compito.pe - Monitorea tus productos favoritos online y recibe alertas de WhatsApp cuando los precios bajen. Ahorra tiempo y dinero en tus compras online.' },
+      { name: 'keywords', content: 'monitoreo de precios, alertas de precios, ahorro en compras, seguimiento de productos, WhatsApp alertas, compras inteligentes, comparador de precios, ofertas, ofertas perú, ahorro perú' },
       { name: 'author', content: 'Compito' },
 
       // Open Graph Meta Tags para compartir en redes sociales
-      { property: 'og:title', content: 'Compito - Compra inteligente y ahorra tiempo' },
+      { property: 'og:title', content: 'Compito.pe - | Monitorea productos | Compara precios | Encuentra las mejores ofertas' },
       { property: 'og:description', content: 'Recibe alertas instantáneas cuando los precios de tus productos favoritos bajen. Compra al mejor precio sin perder tiempo.' },
       { property: 'og:image', content: 'https://compito.pe/logo.png' },
       { property: 'og:url', content: 'https://compito.pe/' },
@@ -154,7 +154,7 @@ export default class HomeComponent implements OnInit {
 
       // Twitter Card Meta Tags
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Compito - Ahorra sin perder tiempo' },
+      { name: 'twitter:title', content: 'Compito.pe - | Monitorea productos | Compara precios | Encuentra las mejores ofertas' },
       { name: 'twitter:description', content: 'Monitorea precios online y recibe alertas instantáneas de WhatsApp cuando bajen.' },
       { name: 'twitter:image', content: 'https://compito.pe/logo.png' }
     ]);

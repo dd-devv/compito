@@ -14,6 +14,7 @@ import { InputOtpModule } from 'primeng/inputotp';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormsModule } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ import { FormsModule } from '@angular/forms';
     InputGroupModule,
     InputGroupAddonModule,
     FormsModule
-],
+  ],
   providers: [MessageService],
   styleUrl: './login.component.css',
   templateUrl: './login.component.html',
@@ -59,10 +60,45 @@ export default class LoginComponent implements OnInit, OnDestroy {
   otpValues: string[] = Array(this.otpLength).fill('');
   isInvalid = false;
   lastBackspace = false;
+  private meta = inject(Meta);
+  private title = inject(Title);
 
   ngOnInit(): void {
+    this.setMetaTags();
     this.initForm();
     this.handleQueryParams(); // Manejar query params al inicializar
+  }
+
+  private setMetaTags(): void {
+    // Establecer Título para Login
+    this.title.setTitle('Iniciar Sesión - Compito.pe | Acceso con WhatsApp');
+
+    // Meta tags para SEO básicos
+    this.meta.addTags([
+      { name: 'description', content: 'Inicia sesión en Compito.pe fácilmente con tu número de WhatsApp. Sin contraseñas, solo código de verificación.' },
+      { name: 'keywords', content: 'login compito, iniciar sesion whatsapp, acceso compito, ingresar compito' },
+      { name: 'robots', content: 'noindex, nofollow' },
+
+      // Canonical URL
+      { name: 'canonical', content: 'https://compito.pe/login' },
+
+      // Open Graph Meta Tags básicos
+      { property: 'og:title', content: 'Iniciar Sesión - Compito.pe' },
+      { property: 'og:description', content: 'Accede a tu cuenta Compito.pe con tu número de WhatsApp' },
+      { property: 'og:url', content: 'https://compito.pe/login' },
+      { property: 'og:type', content: 'website' },
+
+      // Schema.org para página de login
+      {
+        name: 'schema.org', content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Iniciar Sesión",
+          "description": "Página de acceso a Compito.pe",
+          "url": "https://compito.pe/login"
+        })
+      }
+    ]);
   }
 
   ngOnDestroy(): void {
@@ -86,94 +122,94 @@ export default class LoginComponent implements OnInit, OnDestroy {
   }
 
   // Métodos para el OTP Input
-handleInput(event: any, index: number): void {
-  const input = event.target;
-  let value = input.value;
-  
-  // Validar que sea número
-  if (!/^\d*$/.test(value)) {
-    this.isInvalid = true;
-    input.value = '';
-    this.otpValues[index] = '';
-    setTimeout(() => this.isInvalid = false, 1000);
-    return;
-  }
-  
-  // Limitar a un solo dígito
-  if (value.length > 1) {
-    value = value.slice(0, 1);
-    input.value = value;
-  }
-  
-  this.otpValues[index] = value;
-  this.updateOtpFormValue();
-  
-  // Si se ingresó un número y no es el último campo, mover al siguiente
-  if (value && index < this.otpLength - 1) {
-    const nextInput = document.querySelectorAll('.otp-box')[index + 1] as HTMLInputElement;
-    nextInput.focus();
-  }
-  
-  // Si el campo actual está vacío y no es el primero, mover al anterior
-  if (!value && index > 0) {
-    const prevInput = document.querySelectorAll('.otp-box')[index - 1] as HTMLInputElement;
-    prevInput.focus();
-  }
-}
+  handleInput(event: any, index: number): void {
+    const input = event.target;
+    let value = input.value;
 
-  handleKeyDown(event: KeyboardEvent, index: number): void {
-  const input = event.target as HTMLInputElement;
-  
-  // Manejar backspace
-  if (event.key === 'Backspace') {
-    // Si el campo está vacío, retroceder al anterior y borrar su valor
-    if (!input.value && index > 0) {
-      event.preventDefault();
-      const prevInput = document.querySelectorAll('.otp-box')[index - 1] as HTMLInputElement;
-      prevInput.value = '';
-      this.otpValues[index - 1] = '';
-      this.updateOtpFormValue();
-      prevInput.focus();
-    }
-    
-    // Limpiar el valor actual si hay algo
-    if (input.value) {
+    // Validar que sea número
+    if (!/^\d*$/.test(value)) {
+      this.isInvalid = true;
       input.value = '';
       this.otpValues[index] = '';
-      this.updateOtpFormValue();
+      setTimeout(() => this.isInvalid = false, 1000);
+      return;
     }
-    return;
+
+    // Limitar a un solo dígito
+    if (value.length > 1) {
+      value = value.slice(0, 1);
+      input.value = value;
+    }
+
+    this.otpValues[index] = value;
+    this.updateOtpFormValue();
+
+    // Si se ingresó un número y no es el último campo, mover al siguiente
+    if (value && index < this.otpLength - 1) {
+      const nextInput = document.querySelectorAll('.otp-box')[index + 1] as HTMLInputElement;
+      nextInput.focus();
+    }
+
+    // Si el campo actual está vacío y no es el primero, mover al anterior
+    if (!value && index > 0) {
+      const prevInput = document.querySelectorAll('.otp-box')[index - 1] as HTMLInputElement;
+      prevInput.focus();
+    }
   }
-  
-  // Permitir solo números, teclas de control y navegación
-  if (!/^\d$/.test(event.key) && 
+
+  handleKeyDown(event: KeyboardEvent, index: number): void {
+    const input = event.target as HTMLInputElement;
+
+    // Manejar backspace
+    if (event.key === 'Backspace') {
+      // Si el campo está vacío, retroceder al anterior y borrar su valor
+      if (!input.value && index > 0) {
+        event.preventDefault();
+        const prevInput = document.querySelectorAll('.otp-box')[index - 1] as HTMLInputElement;
+        prevInput.value = '';
+        this.otpValues[index - 1] = '';
+        this.updateOtpFormValue();
+        prevInput.focus();
+      }
+
+      // Limpiar el valor actual si hay algo
+      if (input.value) {
+        input.value = '';
+        this.otpValues[index] = '';
+        this.updateOtpFormValue();
+      }
+      return;
+    }
+
+    // Permitir solo números, teclas de control y navegación
+    if (!/^\d$/.test(event.key) &&
       !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(event.key)) {
-    event.preventDefault();
-    this.isInvalid = true;
-    setTimeout(() => this.isInvalid = false, 1000);
+      event.preventDefault();
+      this.isInvalid = true;
+      setTimeout(() => this.isInvalid = false, 1000);
+    }
   }
-}
 
   handlePaste(event: ClipboardEvent): void {
     event.preventDefault();
     const pasteData = event.clipboardData?.getData('text/plain').replace(/\D/g, '');
-    
+
     if (pasteData && pasteData.length === this.otpLength) {
       for (let i = 0; i < this.otpLength; i++) {
         this.otpValues[i] = pasteData[i];
         const input = document.querySelectorAll('.otp-box')[i] as HTMLInputElement;
         input.value = pasteData[i];
       }
-      
+
       this.updateOtpFormValue();
-      
+
       // Enfocar el último campo
       const lastInput = document.querySelectorAll('.otp-box')[this.otpLength - 1] as HTMLInputElement;
       lastInput.focus();
     }
   }
 
-  
+
 
   updateOtpFormValue(): void {
     this.loginForm.get('code')?.setValue(this.otpValues.join(''));
@@ -249,7 +285,7 @@ handleInput(event: any, index: number): void {
     ];
 
     const charCode = event.which || event.keyCode;
-    
+
     // Permitir teclas de control
     if (allowedKeys.includes(charCode)) {
       return true;

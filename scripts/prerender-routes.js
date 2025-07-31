@@ -116,6 +116,8 @@ const fetchData = async (url, label) => {
 
 Allow: /
 Allow: /about
+Allow: /login
+Allow: /register
 Allow: /plans
 Allow: /contact
 Allow: /faqs

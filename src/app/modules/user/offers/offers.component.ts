@@ -23,6 +23,7 @@ import { SkeletonProdComponent } from "../../../ui/skeleton-prod/skeleton-prod.c
 import { DrawerModule } from 'primeng/drawer';
 import { CategoryService } from '../services/category.service';
 import { firstValueFrom } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-offers',
@@ -100,6 +101,9 @@ export default class OffersComponent {
   sidebarVisible = false;
   drawerVisible = false;
 
+  private meta = inject(Meta);
+  private title = inject(Title);
+
   loadStores() {
     const stores = new Set<string>();
     this.products().forEach(product => {
@@ -127,6 +131,7 @@ export default class OffersComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.setMetaTags();
     this.isLoading.set(true);
     // Primero verificar autenticación
     this.isAuthenticated = await firstValueFrom(this.authService.checkAuthStatus());
@@ -137,6 +142,130 @@ export default class OffersComponent {
     if (this.isAuthenticated) {
       this.getCategorysUser();
     }
+  }
+
+  private setMetaTags(): void {
+    // Establecer Título para Ofertas
+    this.title.setTitle('Mejores Ofertas y Descuentos Perú - Compito.pe | +25 Tiendas | Hasta 70% OFF');
+
+    // Meta tags para SEO básicos
+    this.meta.addTags([
+      { name: 'description', content: 'Descubre las mejores ofertas y descuentos de más de 25 tiendas del Perú en un solo lugar. Filtra por tienda, categoría y porcentaje de descuento. Ofertas actualizadas diariamente de Falabella, MercadoLibre, Plaza Vea y más.' },
+      { name: 'keywords', content: 'ofertas peru, descuentos peru, ofertas falabella, ofertas mercadolibre, ofertas plazavea, cyber ofertas, descuentos online, ofertas sodimac, ofertas oechsle, mejores ofertas peru, cyber monday peru, black friday peru' },
+      { name: 'author', content: 'Compito' },
+      { name: 'robots', content: 'index, follow' },
+
+      // Canonical URL para evitar contenido duplicado
+      { name: 'canonical', content: 'https://compito.pe/ofertas' },
+
+      // Open Graph Meta Tags para compartir en redes sociales
+      { property: 'og:title', content: 'Mejores Ofertas Perú 🔥 | Descuentos hasta 70% OFF | +25 Tiendas' },
+      { property: 'og:description', content: '¡Encuentra las mejores ofertas del Perú! Descuentos increíbles de Falabella, MercadoLibre, Plaza Vea y más de 25 tiendas. Actualizado diariamente.' },
+      { property: 'og:image', content: 'https://compito.pe/assets/images/ofertas-descuentos.jpg' },
+      { property: 'og:url', content: 'https://compito.pe/ofertas' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'Compito.pe' },
+      { property: 'og:locale', content: 'es_PE' },
+
+      // Twitter Card Meta Tags
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Mejores Ofertas Perú 🔥 | Descuentos hasta 70% OFF' },
+      { name: 'twitter:description', content: 'Encuentra ofertas increíbles de +25 tiendas peruanas. Filtra por descuento, tienda y categoría. ¡Actualizado diariamente!' },
+      { name: 'twitter:image', content: 'https://compito.pe/assets/images/ofertas-descuentos.jpg' },
+
+      // Meta tags adicionales para SEO local
+      { name: 'geo.region', content: 'PE' },
+      { name: 'geo.country', content: 'Perú' },
+      { name: 'geo.placename', content: 'Lima, Perú' },
+
+      // Schema.org structured data para ofertas
+      {
+        name: 'schema.org', content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Mejores Ofertas y Descuentos Perú",
+          "description": "Descubre las mejores ofertas y descuentos de más de 25 tiendas del Perú",
+          "url": "https://compito.pe/ofertas",
+          "mainEntity": {
+            "@type": "ItemList",
+            "name": "Ofertas Destacadas",
+            "numberOfItems": "500+",
+            "itemListElement": {
+              "@type": "Offer",
+              "category": "Ofertas y Descuentos",
+              "areaServed": "Perú",
+              "availableAtOrFrom": {
+                "@type": "Organization",
+                "name": "Compito.pe"
+              }
+            }
+          },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://compito.pe"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Ofertas",
+                "item": "https://compito.pe/ofertas"
+              }
+            ]
+          }
+        })
+      },
+
+      // Meta tags específicos para ofertas y descuentos
+      { name: 'offer-type', content: 'descuentos,ofertas,promociones' },
+      { name: 'discount-range', content: '10%-70%' },
+      { name: 'store-count', content: '25+' },
+      { name: 'update-frequency', content: 'daily' },
+
+      // Meta tags para filtros y búsqueda
+      { name: 'filter-options', content: 'tienda,categoria,descuento' },
+      { name: 'search-enabled', content: 'true' },
+      { name: 'sort-options', content: 'descuento,precio,popularidad' },
+
+      // Meta tags para tiendas principales (SEO)
+      { name: 'featured-stores', content: 'falabella,mercadolibre,plazavea,sodimac,oechsle,tottus,linio,platanitos,ripley,saga' },
+      { name: 'categories', content: 'tecnologia,moda,hogar,deportes,belleza,electrodomesticos' },
+
+      // Meta tags para eventos especiales
+      { name: 'special-events', content: 'cyber monday,black friday,cyber days,hot sale' },
+      { name: 'deal-types', content: 'flash sale,liquidacion,clearance,outlet' },
+
+      // Meta tags para mejorar CTR
+      { name: 'max-discount', content: '70%' },
+      { name: 'min-discount', content: '10%' },
+      { name: 'avg-savings', content: '35%' },
+      { name: 'deal-count', content: '500+' },
+
+      // Meta tags para rich snippets de ofertas
+      { property: 'product:retailer', content: 'Multiple' },
+      { property: 'product:availability', content: 'in stock' },
+      { property: 'product:condition', content: 'new' },
+      { property: 'product:price:currency', content: 'PEN' },
+
+      // Meta tags adicionales para SEO local de ofertas
+      { name: 'shopping-region', content: 'Peru' },
+      { name: 'deal-location', content: 'online' },
+      { name: 'shipping-area', content: 'Peru' },
+
+      // Meta tags para tiempo y urgencia
+      { name: 'offer-validity', content: 'limited time' },
+      { name: 'update-time', content: 'real-time' },
+      { name: 'deal-freshness', content: 'daily updated' },
+
+      // Meta tags para móvil y experiencia
+      { name: 'mobile-optimized', content: 'true' },
+      { name: 'fast-loading', content: 'true' },
+      { name: 'user-friendly', content: 'true' }
+    ]);
   }
 
   getCategorysUser() {
@@ -196,40 +325,40 @@ export default class OffersComponent {
   //   this.filteredProducts.set(filtered);
   // }
   applyFilter() {
-  this.currentPage = 1;
+    this.currentPage = 1;
 
-  let filtered = this.products();
+    let filtered = this.products();
 
-  // Filtro por tienda
-  if (this.selectedStore) {
-    filtered = filtered.filter(product =>
-      this.extractDomainPipe.transform(product.url) === this.selectedStore
-    );
+    // Filtro por tienda
+    if (this.selectedStore) {
+      filtered = filtered.filter(product =>
+        this.extractDomainPipe.transform(product.url) === this.selectedStore
+      );
+    }
+
+    // Filtro por búsqueda
+    if (this.searchTerm.trim()) {
+      const searchTermLower = this.searchTerm.toLowerCase().trim();
+      filtered = filtered.filter(product =>
+        product.productTitle.toLowerCase().includes(searchTermLower)
+      );
+    }
+
+    // Filtro por descuento (nuevo)
+    if (this.selectedDiscountRange) {
+      filtered = filtered.filter(product =>
+        product.discountPercentage >= this.selectedDiscountRange.value.min &&
+        product.discountPercentage <= this.selectedDiscountRange.value.max
+      );
+    }
+
+    // Ordenar por categorías del usuario
+    if (this.authService.isAuthenticatedUser() && this.categorysUser().length > 0) {
+      filtered = this.sortProductsByUserCategories(filtered);
+    }
+
+    this.filteredProducts.set(filtered);
   }
-
-  // Filtro por búsqueda
-  if (this.searchTerm.trim()) {
-    const searchTermLower = this.searchTerm.toLowerCase().trim();
-    filtered = filtered.filter(product =>
-      product.productTitle.toLowerCase().includes(searchTermLower)
-    );
-  }
-
-  // Filtro por descuento (nuevo)
-  if (this.selectedDiscountRange) {
-    filtered = filtered.filter(product =>
-      product.discountPercentage >= this.selectedDiscountRange.value.min &&
-      product.discountPercentage <= this.selectedDiscountRange.value.max
-    );
-  }
-
-  // Ordenar por categorías del usuario
-  if (this.authService.isAuthenticatedUser() && this.categorysUser().length > 0) {
-    filtered = this.sortProductsByUserCategories(filtered);
-  }
-
-  this.filteredProducts.set(filtered);
-}
 
   private sortProductsByUserCategories(products: ProductPublic[]): ProductPublic[] {
     const userCategories = this.categorysUser();

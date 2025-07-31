@@ -14,6 +14,7 @@ import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     Toast,
     InputGroupModule,
     InputGroupAddonModule
-],
+  ],
   providers: [MessageService],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,8 +43,44 @@ export default class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   isLoading = false;
 
+  private meta = inject(Meta);
+  private title = inject(Title);
+
   ngOnInit(): void {
+    this.setMetaTags();
     this.initForm();
+  }
+
+  private setMetaTags(): void {
+    // Establecer Título para Register
+    this.title.setTitle('Registrarse - Compito.pe | Crear Cuenta con WhatsApp | Gratis');
+
+    // Meta tags para SEO básicos
+    this.meta.addTags([
+      { name: 'description', content: 'Regístrate gratis en Compito.pe con tu número de WhatsApp. Empieza a monitorear precios y recibir alertas de ofertas en minutos.' },
+      { name: 'keywords', content: 'registro compito, crear cuenta whatsapp, registrarse gratis, monitoreo precios gratis' },
+      { name: 'robots', content: 'index, follow' },
+
+      // Canonical URL
+      { name: 'canonical', content: 'https://compito.pe/register' },
+
+      // Open Graph Meta Tags básicos
+      { property: 'og:title', content: 'Regístrate Gratis - Compito.pe | Monitoreo de Precios' },
+      { property: 'og:description', content: 'Crea tu cuenta gratis con WhatsApp y empieza a ahorrar en tus compras online' },
+      { property: 'og:url', content: 'https://compito.pe/register' },
+      { property: 'og:type', content: 'website' },
+
+      // Schema.org para página de registro
+      {
+        name: 'schema.org', content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Registrarse",
+          "description": "Página de registro gratuito en Compito.pe",
+          "url": "https://compito.pe/register"
+        })
+      }
+    ]);
   }
 
   initForm(): void {
