@@ -49,7 +49,7 @@ const fetchData = async (url, label) => {
     ]);
 
     const routes = [
-      '/', '/about', '/plans', '/contact',
+      '/', '/about', '/login', '/register', '/contact',
       '/faqs', '/tutorials', '/seguimientos', '/ofertas'
     ];
 
@@ -118,7 +118,6 @@ Allow: /
 Allow: /about
 Allow: /login
 Allow: /register
-Allow: /plans
 Allow: /contact
 Allow: /faqs
 Allow: /tutorials

@@ -99,11 +99,13 @@ export default class AuthService {
       );
   }
 
-  register(fullname: string, whatsapp: string): Observable<RegisterResponse> {
+  register(fullname: string, whatsapp: string, ciudad: string, genero: string): Observable<RegisterResponse> {
     const registerData: RegisterRequest = {
       fullname,
       // email,
-      whatsapp
+      whatsapp,
+      ciudad,
+      genero
     };
 
     return this.http.post<RegisterResponse>(`${this.apiUrl}users/register`, registerData)

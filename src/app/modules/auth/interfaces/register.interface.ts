@@ -15,6 +15,8 @@ export interface RegisterRequest {
   fullname: string;
   // email: string;
   whatsapp: string;
+  ciudad: string;
+  genero: string;
   // password: string;
 }
 

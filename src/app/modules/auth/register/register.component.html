@@ -1,5 +1,5 @@
 <!-- register.component.html -->
-<div class="flex flex-col justify-center items-center h-screen md:h-96 w-full p-4 mt-5">
+<div class="flex flex-col justify-center items-center h-screen md:h-96 w-full p-4 mt-12">
   <div class="w-full sm:w-4/5 md:w-2/3 lg:w-5/12">
     <p-card class="shadow-md my-8">
       <h3 class="heading-3 font-bold text-center mb-2">
@@ -12,16 +12,48 @@
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
-        <!-- <p-floatlabel variant="on">
-          <input pInputText id="fullname" formControlName="fullname" fluid="true" />
-          <label for="fullname"><i class="pi pi-user me-1"></i> Nombres</label>
-        </p-floatlabel>
+        <div class="mb-4">
+          <p-floatlabel variant="on">
+            <input pInputText id="fullname" formControlName="fullname" fluid="true" />
+            <label for="fullname"><i class="pi pi-user me-1"></i> Nombres</label>
+          </p-floatlabel>
 
-        @if (isFieldInvalid('fullname')) {
-        <small class="text-red-500">
-          {{ getErrorMessage('fullname') }}
-        </small>
-        } -->
+          @if (isFieldInvalid('fullname')) {
+          <small class="text-red-500">
+            {{ getErrorMessage('fullname') }}
+          </small>
+          }
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <p-floatlabel variant="on">
+              <p-select [options]="cities" formControlName="ciudad" [checkmark]="true" optionLabel="name"
+                [showClear]="true" fluid="true" />
+              <label for="ciudad"><i class="pi pi-map-marker me-1"></i> Ciudad</label>
+            </p-floatlabel>
+
+            @if (isFieldInvalid('ciudad')) {
+            <small class="text-red-500">
+              {{ getErrorMessage('ciudad') }}
+            </small>
+            }
+          </div>
+
+          <div>
+            <p-floatlabel variant="on">
+              <p-select [options]="generos" formControlName="genero" [checkmark]="true" optionLabel="name"
+                [showClear]="true" fluid="true" />
+              <label for="genero"><i class="pi pi-mars me-1"></i> Género</label>
+            </p-floatlabel>
+
+            @if (isFieldInvalid('genero')) {
+            <small class="text-red-500">
+              {{ getErrorMessage('genero') }}
+            </small>
+            }
+          </div>
+        </div>
 
         <!-- <p-floatlabel variant="on" class="mt-6">
           <input pInputText id="email" formControlName="email" fluid="true" />
@@ -55,20 +87,16 @@
           <label for="whatsapp"><i class="pi pi-whatsapp me-1"></i> WhatsApp</label>
         </p-floatlabel> -->
         <p-inputgroup>
-              <p-inputgroup-addon>
-                  +51
-              </p-inputgroup-addon>
-              <p-floatlabel>
-                  <input pInputText id="whatsapp"  formControlName="whatsapp" autocomplete="off" fluid="true"
-            type="tel"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            (keypress)="onlyNumbers($event)"
-            (input)="formatWhatsapp($event)"
-            maxlength="11" />
+          <p-inputgroup-addon>
+            +51
+          </p-inputgroup-addon>
+          <p-floatlabel variant="on">
+            <input pInputText id="whatsapp" formControlName="whatsapp" autocomplete="off" fluid="true" type="tel"
+              inputmode="numeric" pattern="[0-9]*" (keypress)="onlyNumbers($event)" (input)="formatWhatsapp($event)"
+              maxlength="11" />
             <label for="whatsapp"><i class="pi pi-whatsapp me-1"></i> WhatsApp</label>
-              </p-floatlabel>
-          </p-inputgroup>
+          </p-floatlabel>
+        </p-inputgroup>
 
         @if (isFieldInvalid('whatsapp')) {
         <small class="text-red-500">

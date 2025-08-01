@@ -15,6 +15,7 @@ import { MessageService } from 'primeng/api';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { Meta, Title } from '@angular/platform-browser';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ import { Meta, Title } from '@angular/platform-browser';
     RouterLink,
     Toast,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    Select
   ],
   providers: [MessageService],
   templateUrl: './register.component.html',
@@ -45,6 +47,39 @@ export default class RegisterComponent implements OnInit {
 
   private meta = inject(Meta);
   private title = inject(Title);
+
+  cities = [
+    { name: 'Lima', code: 'Lima' },
+    { name: 'Arequipa', code: 'Arequipa' },
+    { name: 'Trujillo', code: 'Trujillo' },
+    { name: 'Chiclayo', code: 'Chiclayo' },
+    { name: 'Piura', code: 'Piura' },
+    { name: 'Iquitos', code: 'Iquitos' },
+    { name: 'Cusco', code: 'Cusco' },
+    { name: 'Chimbote', code: 'Chimbote' },
+    { name: 'Huancayo', code: 'Huancayo' },
+    { name: 'Tacna', code: 'Tacna' },
+    { name: 'Ica', code: 'Ica' },
+    { name: 'Cajamarca', code: 'Cajamarca' },
+    { name: 'Pucallpa', code: 'Pucallpa' },
+    { name: 'Sullana', code: 'Sullana' },
+    { name: 'Ayacucho', code: 'Ayacucho' },
+    { name: 'Huánuco', code: 'Huánuco' },
+    { name: 'Chincha Alta', code: 'Chincha Alta' },
+    { name: 'Juliaca', code: 'Juliaca' },
+    { name: 'Puno', code: 'Puno' },
+    { name: 'Tarapoto', code: 'Tarapoto' },
+    { name: 'Tumbes', code: 'Tumbes' },
+    { name: 'Talara', code: 'Talara' },
+    { name: 'Jaén', code: 'Jaén' },
+    { name: 'Huaraz', code: 'Huaraz' },
+    { name: 'Moquegua', code: 'Moquegua' }
+  ];
+
+  generos = [
+    { name: 'Masculino', code: 'Masculino' },
+    { name: 'Femenino', code: 'Femenino' }
+  ];
 
   ngOnInit(): void {
     this.setMetaTags();
@@ -85,7 +120,7 @@ export default class RegisterComponent implements OnInit {
 
   initForm(): void {
     this.registerForm = this.fb.group({
-      fullname: ['name', [
+      fullname: ['', [
         Validators.required,
         Validators.minLength(4)
       ]],
@@ -94,6 +129,12 @@ export default class RegisterComponent implements OnInit {
       //   Validators.email,
       //   Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
       // ]],
+      ciudad: [null,
+        Validators.required,
+      ],
+      genero: [null,
+        Validators.required,
+      ],
       whatsapp: ['', {
         validators: [
           Validators.required,
@@ -163,11 +204,13 @@ export default class RegisterComponent implements OnInit {
     const fullnameValue = this.registerForm.get('fullname')?.value;
     // const emailValue = this.registerForm.get('email')?.value;
     const whatsappValue = this.registerForm.get('whatsapp')?.value;
+    const ciudadValue = this.registerForm.get('ciudad')?.value.code;
+    const generoValue = this.registerForm.get('genero')?.value.code;
 
     // Eliminar espacios del número de WhatsApp
     const whatsapp = whatsappValue?.replace(/\s/g, '');
 
-    this.authService.register(fullnameValue, whatsapp)
+    this.authService.register(fullnameValue, whatsapp, ciudadValue, generoValue)
       .subscribe({
         next: (res) => {
           this.messageService.add({ severity: 'success', summary: 'Éxito', detail: res.message, life: 3000 });
@@ -254,6 +297,16 @@ export default class RegisterComponent implements OnInit {
         const requiredLength = errors['minlength'].requiredLength;
         return `El nombre completo debe tener al menos ${requiredLength} caracteres`;
       }
+    }
+
+    // Mensajes de error para ciudad
+    if (fieldName === 'ciudad') {
+      if (errors['required']) return 'La ciudad es requerida';
+    }
+
+    // Mensajes de error para género
+    if (fieldName === 'genero') {
+      if (errors['required']) return 'El género es requerido';
     }
 
     return 'Campo inválido';
