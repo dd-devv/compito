@@ -73,10 +73,16 @@ export interface ProductInfo {
   description:  string;
   currentPrice: number;
   image:        string;
+  specialPrice:  specialPriceInfo;
   url:          string;
   urlId:        string;
   _id:        string;
   job:        string;
+}
+
+export interface specialPriceInfo {
+  type: string;
+  price: string;
 }
 
 export interface DeleteURLResp {

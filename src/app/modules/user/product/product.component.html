@@ -15,8 +15,8 @@
   </div>
   } @if (!productService.isLoading()){ @let estadoDelPrecio =
   obtenerEstadoDelPrecio(productService.priceHistory().productInfo.currentPrice,
-  productService.priceHistory().priceHistory.prices); @let arrPrices =
-  productService.priceHistory().priceHistory.prices;
+  productService.priceHistory().priceHistory.prices); 
+  @let arrPrices = productService.priceHistory().priceHistory.prices;
   <!-- <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4"> -->
   <div class="mt-8 grid grid-cols-1 lg:flex lg:flex-row lg:gap-4">
     <!-- imagen del producto  -->
@@ -98,10 +98,19 @@
           </div>
           <div class="info-content">
             <h4 class="text-sm font-extralight mb-1">Precio especial</h4>
+            <!-- <h3
+              class="text-base font-bold p-1 px-2 bg-gray-600 bg-opacity-30 rounded-xl"
+            >
+              {{ productService.priceHistory().productInfo.specialPrice.price| currency : "S/ " }}
+            </h3> -->
             <h3
               class="text-base font-bold p-1 px-2 bg-gray-600 bg-opacity-30 rounded-xl"
             >
-              {{ calcularMediana(arrPrices) | currency : "S/ " }}
+              {{
+                productService.priceHistory().productInfo.specialPrice != null
+                  ? (productService.priceHistory().productInfo.specialPrice.price | currency : "S/ ")
+                  : '----'
+              }}
             </h3>
           </div>
           <div class="info-content">
@@ -323,62 +332,6 @@
 
     <div class="flex flex-col w-full">
       <div class="xd">
-        <!-- <h1 class="mt-7 mb-6 text-2xl text-start">Recomendacion de compra</h1>
-      <div class="flex flex-row gap-2">
-        @if (estadoDelPrecio === 'verde') {
-        <div class="flex flex-row">
-          <div class="flex flex-col p-4 bg-green-600 bg-opacity-10 rounded-lg border border-green-600">
-            <h3 class="text-xl mb-1">¡Precio mínimo histórico!</h3>
-            <p>Es ahora o nunca. Aprovecha esta oferta antes de que se acabe.</p>
-          </div>
-        </div>
-        } @else if (estadoDelPrecio === 'amarillo') {
-        <div class="flex flex-row">
-          <div class="flex flex-col p-4 bg-yellow-600 bg-opacity-10 rounded-lg border border-yellow-600">
-            <h3 class="text-xl mb-1">Precio habitual</h3>
-            <p>No está mal, pero podría bajar más. Si no tienes apuro, vale la pena esperar.</p>
-          </div>
-        </div>
-        } @else {
-        <div class="flex flex-row">
-          <div class="flex flex-col p-4 bg-red-600 bg-opacity-10 rounded-lg border border-red-600">
-            <h3 class="text-xl mb-1">Aún no es el momento ideal</h3>
-            <p>Espera un poco más, nosotros te avisaremos cuando baje de verdad.</p>
-          </div>
-        </div>
-        }
-        <div class="flex flex-row items-center justify-between ml-4 w-8 relative gap-1">
-          <div class=" flex flex-col items-center justify-evenly  h-full">
-            <div class="h-5 w-5">
-              @if (estadoDelPrecio !== 'verde' && estadoDelPrecio !== 'amarillo') {
-              <div
-                class=" w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90">
-              </div>
-              }
-            </div>
-            <div class="h-5 w-5">
-              @if (estadoDelPrecio === 'amarillo') {
-              <div
-                class=" w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90">
-              </div>
-              }
-            </div>
-            <div class="h-5 w-5">
-              @if (estadoDelPrecio === 'verde') {
-              <div
-                class=" w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90">
-              </div>
-              }
-            </div>
-          </div>
-          <div class="h-full w-2 rounded-full flex flex-col">
-            <div class="h-1/3 bg-red-600 rounded-t-full"></div>
-            <div class="h-1/3 bg-yellow-500"></div>
-            <div class="h-1/3 bg-green-600 rounded-b-full"></div>
-          </div>
-        </div>
-      </div> -->
-
         <!-- Prod en otras tiendas -->
         <div class="flex w-full">
           <div class="w-full">
@@ -397,6 +350,7 @@
                   <tr class="sticky top-0 bg-white z-10 shadow-sm">
                     <th class="p-3">Tienda</th>
                     <th class="p-3">Precio</th>
+                    <!-- <th class="p-3">Precio especial</th> -->
                     <th class="p-3"></th>
                   </tr>
                 </ng-template>
@@ -439,6 +393,18 @@
                         {{ product.currentPrice | currency : "S/" }}
                       </a>
                     </td>
+                    <!-- <td class="w-1/3 p-3">
+                      <a
+                        [href]="
+                          product.url +
+                          '?utm_source=compito.pe&utm_medium=referral'
+                        "
+                        target="_blank"
+                        class="block"
+                      >
+                        {{ product.specialPrice.price | currency : "S/" }}
+                      </a>
+                    </td> -->
                     <td class="w-1/3 p-3">
                       <a
                         [href]="
