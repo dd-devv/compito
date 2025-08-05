@@ -299,6 +299,10 @@ export default class OfferComponent implements OnInit {
 
     // if (precioActual <= minimo && precioActual != mediana) {
     if (precioActual <= minimo) {
+      if (preciosHistoricos.length < 3) {
+        return 'amarillo'; // 🟡 Precio mínimo histórico pero igual a la mediana
+        
+      }
       return 'verde'; // 🟢 Precio mínimo histórico
     } else if (precioActual <= mediana * 1.05) {
       return 'amarillo'; // 🟡 Precio cercano al habitual
