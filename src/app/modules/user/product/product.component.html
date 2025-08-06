@@ -16,7 +16,7 @@
   } @if (!productService.isLoading()){ @let estadoDelPrecio =
   obtenerEstadoDelPrecio(productService.priceHistory().productInfo.currentPrice,
   productService.priceHistory().priceHistory.prices); 
-  @let arrPrices = productService.priceHistory().priceHistory.prices;
+  <!-- @let arrPrices = productService.priceHistory().priceHistory.prices; -->
   <!-- <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4"> -->
   <div class="mt-8 grid grid-cols-1 lg:flex lg:flex-row lg:gap-4">
     <!-- imagen del producto  -->
@@ -348,15 +348,27 @@
               >
                 <ng-template #header>
                   <tr class="sticky top-0 bg-white z-10 shadow-sm">
-                    <th class="p-3">Tienda</th>
-                    <th class="p-3">Precio</th>
-                    <!-- <th class="p-3">Precio especial</th> -->
+                    <th class="p-3">
+                      <p class="text-center">
+                        Tienda
+                      </p>
+                      </th>
+                    <th class="p-3 text-center">
+                      <p class="text-center">
+                        Precio
+                      </p>
+                    </th>
+                    <th class="p-3">
+                      <p class="text-center">
+                        Precio especial
+                      </p>
+                      </th>
                     <th class="p-3"></th>
                   </tr>
                 </ng-template>
                 <ng-template #body let-product>
                   <tr [pSelectableRow]="product">
-                    <td class="w-1/3 p-3">
+                    <td class="w-1/4 p-3">
                       <a
                         [href]="
                           product.url +
@@ -365,7 +377,7 @@
                         target="_blank"
                         class="block"
                       >
-                        <div class="flex flex-row items-center gap-2">
+                        <div class="flex flex-row items-center justify-center gap-2">
                           <img
                             class="h-6"
                             src="../../../../assets/svg/{{
@@ -374,14 +386,14 @@
                             alt="Logo {{ product.url | extractDomain }}"
                           />
                           <h3
-                            class="text-xs font-bold flex flex-row items-center gap-2"
+                            class="hidden sm:flex text-xs font-bold  flex-row items-center gap-2"
                           >
                             {{ product.url | extractDomain | titlecase }}
                           </h3>
                         </div>
                       </a>
                     </td>
-                    <td class="w-1/3 p-3">
+                    <td class="w-1/4 p-3">
                       <a
                         [href]="
                           product.url +
@@ -393,19 +405,14 @@
                         {{ product.currentPrice | currency : "S/" }}
                       </a>
                     </td>
-                    <!-- <td class="w-1/3 p-3">
-                      <a
-                        [href]="
-                          product.url +
-                          '?utm_source=compito.pe&utm_medium=referral'
-                        "
-                        target="_blank"
-                        class="block"
-                      >
-                        {{ product.specialPrice.price | currency : "S/" }}
-                      </a>
-                    </td> -->
-                    <td class="w-1/3 p-3">
+                    <td class="w-1/4 p-3">
+                      {{
+                        product.specialPrice != null
+                          ? (product.specialPrice.price | currency : "S/ ")
+                          : '----'
+                      }}
+                    </td>
+                    <td class="w-1/4 p-3">
                       <a
                         [href]="
                           product.url +

@@ -55,6 +55,7 @@ export interface ProductPublic {
   lowestPrice:        number;
   previousPrice:      number;
   discountPercentage: number;
+  specialPrice:  specialPriceInfo;
 }
 
 export interface PriceHistory {
