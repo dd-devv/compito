@@ -490,4 +490,19 @@ export default class ProductComponent implements OnInit {
     }
     return text.substring(0, length) + '...';
   }
+
+//   redirectToProduct(url: string) {
+//   // window.open(`${url}?utm_source=compito.pe&utm_medium=referral`, '_blank');
+// }
+
+redirectToProduct(urlId: string) {
+  console.log('Intentando navegar a:', '/seguimientos/' + urlId);
+  this.router.navigate(['/seguimientos', urlId])
+    .then(success => {
+      console.log('Navegación exitosa?', success);
+    })
+    .catch(err => {
+      console.error('Error en navegación:', err);
+    });
+}
 }

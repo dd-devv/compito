@@ -15,7 +15,7 @@
   </div>
   } @if (!productService.isLoading()){ @let estadoDelPrecio =
   obtenerEstadoDelPrecio(productService.priceHistory().productInfo.currentPrice,
-  productService.priceHistory().priceHistory.prices); 
+  productService.priceHistory().priceHistory.prices);
   <!-- @let arrPrices = productService.priceHistory().priceHistory.prices; -->
   <!-- <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-4"> -->
   <div class="mt-8 grid grid-cols-1 lg:flex lg:flex-row lg:gap-4">
@@ -98,15 +98,25 @@
           </div>
           <div class="info-content">
             <div class="flex flex-row items-center gap-1 mb-1 justify-center">
-              <h4 class="text-sm font-extralight ">Precio {{
-                productService.priceHistory().productInfo.specialPrice != null
-                  ? ("")
-                  : 'especial'
-              }}</h4>
-              @if (productService.priceHistory().productInfo.specialPrice != null) {
-                <img src="../../../../assets/svg/tarjetas/{{
+              <h4 class="text-sm font-extralight">
+                Precio
+                {{
+                  productService.priceHistory().productInfo.specialPrice != null
+                    ? ""
+                    : "especial"
+                }}
+              </h4>
+              @if (productService.priceHistory().productInfo.specialPrice !=
+              null) {
+              <img
+                src="../../../../assets/svg/tarjetas/{{
                   productService.priceHistory().productInfo.specialPrice.type
-                }}.svg" alt="Logo {{ productService.priceHistory().productInfo.specialPrice.type }}" class="h-5" />
+                }}.svg"
+                alt="Logo {{
+                  productService.priceHistory().productInfo.specialPrice.type
+                }}"
+                class="h-5"
+              />
               }
             </div>
             <!-- <h3
@@ -119,8 +129,9 @@
             >
               {{
                 productService.priceHistory().productInfo.specialPrice != null
-                  ? (productService.priceHistory().productInfo.specialPrice.price | currency : "S/ ")
-                  : '----'
+                  ? (productService.priceHistory().productInfo.specialPrice
+                      .price | currency : "S/ ")
+                  : "----"
               }}
             </h3>
           </div>
@@ -162,83 +173,82 @@
 
           <!-- triangulo indicador y colores -->
           <div class="flex flex-col">
-
-          <p class="text-sm mb-1 text-end text-balance">
-            Recomendacion de compra
-          </p>
-          <div class="flex flex-row gap-2">
-            @if (estadoDelPrecio === 'verde') {
-            <div class="flex flex-row">
-              <div
-                class="flex flex-col p-3 pt-2 bg-green-600 bg-opacity-10 rounded-lg border border-green-600"
-              >
-                <h3 class="text-lg mb-0">¡Precio mínimo histórico!</h3>
-                <p class="text-sm">
-                  Es ahora o nunca. Aprovecha esta oferta antes de que se acabe.
-                </p>
-              </div>
-            </div>
-            } @else if (estadoDelPrecio === 'amarillo') {
-            <div class="flex flex-row">
-              <div
-                class="flex flex-col p-3 pt-2 bg-yellow-600 bg-opacity-10 rounded-lg border border-yellow-600"
-              >
-                <h3 class="text-lg mb-0">Precio habitual</h3>
-                <p>
-                  No está mal, pero podría bajar más. Si no tienes apuro, vale
-                  la pena esperar.
-                </p>
-              </div>
-            </div>
-            } @else {
-            <div class="flex flex-row">
-              <div
-                class="flex flex-col p-3 pt-2 bg-red-600 bg-opacity-10 rounded-lg border border-red-600"
-              >
-                <h3 class="text-lg mb-0">Aún no es el momento ideal</h3>
-                <p>
-                  Espera un poco más, nosotros te avisaremos cuando baje de
-                  verdad.
-                </p>
-              </div>
-            </div>
-            }
-            <div
-              class="flex flex-row items-center justify-between ml-4 w-8 relative gap-1"
-            >
-              <div class="flex flex-col items-center justify-evenly h-full">
-                <div class="h-5 w-5">
-                  @if (estadoDelPrecio !== 'verde' && estadoDelPrecio !==
-                  'amarillo') {
-                  <div
-                    class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
-                  ></div>
-                  }
-                </div>
-                <div class="h-5 w-5">
-                  @if (estadoDelPrecio === 'amarillo') {
-                  <div
-                    class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
-                  ></div>
-                  }
-                </div>
-                <div class="h-5 w-5">
-                  @if (estadoDelPrecio === 'verde') {
-                  <div
-                    class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
-                  ></div>
-                  }
+            <p class="text-sm mb-1 text-end text-balance">
+              Recomendacion de compra
+            </p>
+            <div class="flex flex-row gap-2">
+              @if (estadoDelPrecio === 'verde') {
+              <div class="flex flex-row">
+                <div
+                  class="flex flex-col p-3 pt-2 bg-green-600 bg-opacity-10 rounded-lg border border-green-600"
+                >
+                  <h3 class="text-lg mb-0">¡Precio mínimo histórico!</h3>
+                  <p class="text-sm">
+                    Es ahora o nunca. Aprovecha esta oferta antes de que se
+                    acabe.
+                  </p>
                 </div>
               </div>
-              <div class="h-full w-2 rounded-full flex flex-col">
-                <div class="h-1/3 bg-red-600 rounded-t-full"></div>
-                <div class="h-1/3 bg-yellow-500"></div>
-                <div class="h-1/3 bg-green-600 rounded-b-full"></div>
+              } @else if (estadoDelPrecio === 'amarillo') {
+              <div class="flex flex-row">
+                <div
+                  class="flex flex-col p-3 pt-2 bg-yellow-600 bg-opacity-10 rounded-lg border border-yellow-600"
+                >
+                  <h3 class="text-lg mb-0">Precio habitual</h3>
+                  <p>
+                    No está mal, pero podría bajar más. Si no tienes apuro, vale
+                    la pena esperar.
+                  </p>
+                </div>
+              </div>
+              } @else {
+              <div class="flex flex-row">
+                <div
+                  class="flex flex-col p-3 pt-2 bg-red-600 bg-opacity-10 rounded-lg border border-red-600"
+                >
+                  <h3 class="text-lg mb-0">Aún no es el momento ideal</h3>
+                  <p>
+                    Espera un poco más, nosotros te avisaremos cuando baje de
+                    verdad.
+                  </p>
+                </div>
+              </div>
+              }
+              <div
+                class="flex flex-row items-center justify-between ml-4 w-8 relative gap-1"
+              >
+                <div class="flex flex-col items-center justify-evenly h-full">
+                  <div class="h-5 w-5">
+                    @if (estadoDelPrecio !== 'verde' && estadoDelPrecio !==
+                    'amarillo') {
+                    <div
+                      class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
+                    ></div>
+                    }
+                  </div>
+                  <div class="h-5 w-5">
+                    @if (estadoDelPrecio === 'amarillo') {
+                    <div
+                      class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
+                    ></div>
+                    }
+                  </div>
+                  <div class="h-5 w-5">
+                    @if (estadoDelPrecio === 'verde') {
+                    <div
+                      class="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[20px] border-b-current rotate-90"
+                    ></div>
+                    }
+                  </div>
+                </div>
+                <div class="h-full w-2 rounded-full flex flex-col">
+                  <div class="h-1/3 bg-red-600 rounded-t-full"></div>
+                  <div class="h-1/3 bg-yellow-500"></div>
+                  <div class="h-1/3 bg-green-600 rounded-b-full"></div>
+                </div>
               </div>
             </div>
           </div>
-          </div>
-
         </div>
 
         <a
@@ -360,89 +370,62 @@
                 <ng-template #header>
                   <tr class="sticky top-0 bg-white z-10 shadow-sm">
                     <th class="p-3">
-                      <p class="text-center">
-                        Tienda
-                      </p>
-                      </th>
+                      <p class="text-center">Tienda</p>
+                    </th>
                     <th class="p-3 text-center">
-                      <p class="text-center">
-                        Precio
-                      </p>
+                      <p class="text-center">Precio</p>
                     </th>
                     <th class="p-3">
-                      <p class="text-center">
-                        Precio especial
-                      </p>
-                      </th>
+                      <p class="text-center">Precio especial</p>
+                    </th>
                     <th class="p-3"></th>
                   </tr>
                 </ng-template>
                 <ng-template #body let-product>
-                  <tr [pSelectableRow]="product">
+                  <tr
+                    [pSelectableRow]="product"
+                    (click)="redirectToProduct(product.urlId)"
+                  >
                     <td class="w-1/4 p-1">
-                      <a
-                        [href]="
-                          product.url +
-                          '?utm_source=compito.pe&utm_medium=referral'
-                        "
-                        target="_blank"
-                        class="block"
+                      <div
+                        class="flex flex-row items-center justify-center gap-2"
                       >
-                        <div class="flex flex-row items-center justify-center gap-2">
-                          <img
-                            class="h-6"
-                            src="../../../../assets/svg/{{
-                              product.url | extractDomain
-                            }}.svg"
-                            alt="Logo {{ product.url | extractDomain }}"
-                          />
-                          <h3
-                            class="hidden sm:flex text-xs font-bold  flex-row items-center gap-2"
-                          >
-                            {{ product.url | extractDomain | titlecase }}
-                          </h3>
-                        </div>
-                      </a>
+                        <img
+                          class="h-6"
+                          src="../../../../assets/svg/{{
+                            product.url | extractDomain
+                          }}.svg"
+                          alt="Logo {{ product.url | extractDomain }}"
+                        />
+                        <h3
+                          class="hidden sm:flex text-xs font-bold flex-row items-center gap-2"
+                        >
+                          {{ product.url | extractDomain | titlecase }}
+                        </h3>
+                      </div>
                     </td>
                     <td class="w-1/4 p-1">
-                      <a
-                        [href]="
-                          product.url +
-                          '?utm_source=compito.pe&utm_medium=referral'
-                        "
-                        target="_blank"
-                        class="block text-sm text-center lg:text-base"
-                      >
+                      <div class="block text-sm text-center lg:text-base">
                         {{ product.currentPrice | currency : "S/" }}
-                      </a>
+                      </div>
                     </td>
                     <td class="w-1/4 p-1">
-                      <a href="" class="block text-sm text-center lg:text-base">
-
+                      <div class="block text-sm text-center lg:text-base">
                         {{
                           product.specialPrice != null
-                          ? (product.specialPrice.price | currency : "S/")
-                          : '----'
+                            ? (product.specialPrice.price | currency : "S/")
+                            : "----"
                         }}
-                      </a>
+                      </div>
                     </td>
                     <td class="w-1/4 p-1">
-                      <a
-                        [href]="
-                          product.url +
-                          '?utm_source=compito.pe&utm_medium=referral'
-                        "
-                        target="_blank"
-                        class="block"
-                      >
-                        <div>
-                          <img
-                            [src]="product.image"
-                            [alt]="product.title"
-                            class="h-14 md:h-16 rounded m-auto"
-                          />
-                        </div>
-                      </a>
+                      <div>
+                        <img
+                          [src]="product.image"
+                          [alt]="product.title"
+                          class="h-14 md:h-16 rounded m-auto"
+                        />
+                      </div>
                     </td>
                   </tr>
                 </ng-template>
