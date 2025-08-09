@@ -453,4 +453,15 @@ export default class OfferComponent implements OnInit {
     }
     return text.substring(0, length) + '...';
   }
+
+  redirectToProduct(urlId: string) {
+  console.log('Intentando navegar a:', '/seguimientos/' + urlId);
+  this.router.navigate(['/seguimientos', urlId])
+    .then(success => {
+      console.log('Navegación exitosa?', success);
+    })
+    .catch(err => {
+      console.error('Error en navegación:', err);
+    });
+}
 }
