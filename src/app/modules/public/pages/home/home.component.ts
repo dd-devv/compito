@@ -18,6 +18,7 @@ import { Shop, Shops } from '../../../../interfaces/shop.interface';
 import { Meta, Title } from '@angular/platform-browser';
 import { PriceHistory } from '../../../user/interfaces';
 import { ChartModule } from 'primeng/chart';
+import { ImageCompare } from 'primeng/imagecompare';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,8 @@ import { ChartModule } from 'primeng/chart';
     RouterLink,
     NumberShortPipe,
     ExtractDomainPipe,
-    ChartModule
+    ChartModule,
+    ImageCompare
   ],
   providers: [MessageService],
   templateUrl: './home.component.html',
