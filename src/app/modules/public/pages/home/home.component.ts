@@ -258,6 +258,18 @@ export default class HomeComponent implements OnInit {
     }
   }
 
+  getImageSrc(): string {
+    return this.themeService.getStoredThemePreference() 
+      ? 'https://res.cloudinary.com/dszjxyo0b/image/upload/f_avif/v1753116455/message-whatsapp-dark_fiqcpb.png'
+      : 'https://res.cloudinary.com/dszjxyo0b/image/upload/f_avif/v1753116455/message-whatsapp-light_pkvuxq.png';
+  }
+
+  getImagePhoneSrc(): string {
+    return this.themeService.getStoredThemePreference() 
+      ? 'https://res.cloudinary.com/dszjxyo0b/image/upload/f_avif/v1751666424/whatsapp-darkmovil_nwlmj4.jpg'
+      : 'https://res.cloudinary.com/dszjxyo0b/image/upload/f_avif/v1751666426/whatsapp-light-movil_e75ng0.jpg';
+  }
+
   // Método para actualizar el gráfico con los datos del historial de precios
   updateChart(priceHistory: any) {
     if (isPlatformBrowser(this.platformId)) {

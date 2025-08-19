@@ -26,11 +26,15 @@ export class ThemeService {
 
     // Verifica el localStorage primero
     const storedPreference = localStorage.getItem('isDarkTheme');
+    // console.log('Preferencia de tema almacenada:', storedPreference);
     if (storedPreference !== null) {
+      // console.log('entra al if');
+      // console.log('Valor de preferencia:', JSON.parse(storedPreference));
       return JSON.parse(storedPreference);
     }
 
     // Si no hay preferencia guardada, verifica la preferencia del sistema
+    // console.log('preferencia del sistema', window.matchMedia('(prefers-color-scheme: dark)').matches);
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
