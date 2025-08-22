@@ -46,6 +46,9 @@ export class LayoutComponent implements OnInit {
 
   isBrowser = false;
 
+  // countdown: number = 15;
+  countdown = signal(15);
+
   dialogVisible = signal(false);
 
   shouldShowDialog = computed(() =>
@@ -62,6 +65,19 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.isBrowser = true;
+      const timer = setInterval(() => {
+        this.countdown.update(val => val - 1);
+        
+        if (this.countdown() <= 0) {
+          clearInterval(timer);
+          window.location.href = 'https://compito.pe';
+        }
+      }, 1000);
+    }
+
     // Verificar si estamos en el navegador
     this.isBrowser = isPlatformBrowser(this.platformId);
 
